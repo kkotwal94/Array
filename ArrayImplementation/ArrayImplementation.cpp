@@ -25,6 +25,16 @@ void printArray(Node s[], int length) {
 		
 		cout << "[" << s[i].Name <<", " <<s[i].age << "]";
 	}
+	cout << endl;
+}
+
+void printArray(Node* s[], int length) {
+	for (int i = 0; i < length; i++)
+	{
+
+		cout << "[" << s[i]->Name << ", " << s[i]->age << "]";
+	}
+	cout << endl;
 }
 
 void sortArray(int s[], int length) { //bubblesort O(n^2) time this shit blows
@@ -66,15 +76,33 @@ int binarySearch(int s[], int start, int end, int search) { //O(log n) time to s
 	}
 }
 
-//Node Name sort!!===========================================================================================
-void sortArray(Node s[], int length) { //bubblesort O(n^2) time this shit blows, age sort
+//Node age sort!!===========================================================================================
+void sortArray(Node s[], int length) { //bubblesort O(n^2) time this sucks
 	for (int i = 0; i < length; i++) { //for the integer at position 0 to the end
 		for (int x = 0; x < length - 1; x++) { // for the integer at position 0 to the end - 1
 			if (s[x].age > s[x + 1].age) { // compare itself and neighbor
 				int temp = s[x].age; //save what x holds
-				int temp2 = s[x + 1].age; // save what neighbor holds
-				s[x].age = temp2; //perform swap
+				string nameTemp = s[x].Name;
+				s[x].age = s[x+1].age; //perform swap
+				s[x].Name = s[x + 1].Name;
 				s[x + 1].age = temp; //perform swap
+				s[x + 1].Name = nameTemp;
+				//printArray(s, length);
+			}
+		}
+	}
+}
+
+void sortArray(Node* s[], int length) { //bubblesort O(n^2) time this sucks
+	for (int i = 0; i < length; i++) { //for the integer at position 0 to the end
+		for (int x = 0; x < length - 1; x++) { // for the integer at position 0 to the end - 1
+			if (s[x]->age > s[x + 1]->age) { // compare itself and neighbor
+				int temp = s[x]->age; //save what x holds
+				string nameTemp = s[x]->Name;
+				s[x]->age = s[x + 1]->age; //perform swap
+				s[x]->Name = s[x + 1]->Name;
+				s[x + 1]->age = temp; //perform swap
+				s[x + 1]->Name = nameTemp;
 				//printArray(s, length);
 			}
 		}
@@ -87,9 +115,29 @@ void sortArrayName(Node s[], int length) { //bubblesort O(n^2) time this shit bl
 		for (int x = 0; x < length - 1; x++) { // for the integer at position 0 to the end - 1
 			if (s[x].Name > s[x + 1].Name) { // compare itself and neighbor
 				string temp = s[x].Name; //save what x holds
-				string temp2 = s[x + 1].Name; // save what neighbor holds
-				s[x].Name = temp2; //perform swap
+				int numberTemp = s[x].age;
+
+				s[x].Name = s[x + 1].Name; //perform swap
+				s[x].age = s[x + 1].age;
 				s[x + 1].Name = temp; //perform swap
+				s[x + 1].age = numberTemp;
+				//printArray(s, length);
+			}
+		}
+	}
+}
+
+void sortArrayName(Node* s[], int length) { //bubblesort O(n^2) time this shit blows, age sort
+	for (int i = 0; i < length; i++) { //for the integer at position 0 to the end
+		for (int x = 0; x < length - 1; x++) { // for the integer at position 0 to the end - 1
+			if (s[x]->Name > s[x + 1]->Name) { // compare itself and neighbor
+				string temp = s[x]->Name; //save what x holds
+				int numberTemp = s[x]->age;
+				
+				s[x]->Name = s[x + 1]->Name; //perform swap
+				s[x]->age = s[x + 1]->age;
+				s[x + 1]->Name = temp; //perform swap
+				s[x+1]->age = numberTemp;
 				//printArray(s, length);
 			}
 		}
@@ -109,7 +157,7 @@ void sortArrayName(Node s[], int length) { //bubblesort O(n^2) time this shit bl
 int main()
 {
 	//==================================================================
-	/*Node myNodeShit[5];
+	/*Node myNodeStuff[5];
 	Node Apple;
 	Apple.age = 16;
 	Apple.Name = "Apple";
@@ -126,31 +174,45 @@ int main()
 	Berry.age = 20;
 	Berry.Name = "Berry";
 	
-	myNodeShit[0] = Apple;
-	myNodeShit[1] = Grape;
-	myNodeShit[2] = Orange;
-	myNodeShit[3] = Lemon;
-	myNodeShit[4] = Berry;
+	myNodeStuff[0] = Apple;
+	myNodeStuff[1] = Grape;
+	myNodeStuff[2] = Orange;
+	myNodeStuff[3] = Lemon;
+	myNodeStuff[4] = Berry;
 	
-	sortArrayName(myNodeShit, 5);
-	printArray(myNodeShit, 5);*/
+	sortArrayName(myNodeStuff, 5);
+	printArray(myNodeStuff, 5);*/
 
 	
 	//===================================================================
-	//Wont work with pointer tho?========================================
-	Node* sumShit[5];
+	//Works now========================================
+	Node* sumStuff[5];
 	Node* America = new Node();
-	America->age = 16;
+	America->age = 125325;
 	America->Name = "America";
-	sumShit[0] = America;
+	sumStuff[0] = America;
 	Node* Japan = new Node();
-	Japan->age = 15;
+	Japan->age = 1543;
 	Japan->Name = "Japan";
-	sumShit[1] = Japan;
-
-	cout << "[" << sumShit[1]->Name << ", " << sumShit[1]->age << "]";
+	sumStuff[1] = Japan;
+	Node* Mexico = new Node();
+	Mexico->age = 5;
+	Mexico->Name = "Mexico";
+	sumStuff[2] = Mexico;
+	Node* China = new Node();
+	China->age = 5833;
+	China->Name = "China";
+	sumStuff[3] = China;
+	Node* Russia = new Node();
+	Russia->age = 99;
+	Russia->Name = "Russia";
+	sumStuff[4] = Russia;
 	//==========================================================================
-	
+	printArray(sumStuff,5);
+	sortArrayName(sumStuff, 5);
+	printArray(sumStuff, 5);
+	sortArray(sumStuff, 5);
+	printArray(sumStuff, 5);
 	int x;
 	/*
 	int i;
